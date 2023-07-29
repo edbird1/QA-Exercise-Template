@@ -3,7 +3,7 @@
   "version": "1.0.44",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node --loader ts-node/esm src/index.ts"
+    "dev": "node --loader ts-node/esm src/run.ts"
   },
   "dependencies": {
     "@bogeychan/elysia-polyfills": "^0.5.3",

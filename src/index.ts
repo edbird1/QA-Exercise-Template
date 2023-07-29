@@ -8,7 +8,7 @@ import createDomPurify from 'dompurify';
 import { JSDOM } from 'jsdom';
 const DomPurify = createDomPurify(new JSDOM('').window);
 
-const app = new Elysia()
+export const app = new Elysia()
   .onError(({ error, set }) => {
     // @ts-ignore
     if ('code' in error && !isNaN(error.code)) set.status = +error.code
@@ -122,8 +122,3 @@ const app = new Elysia()
       404: t.String({ example: 'Template not found' })
     }
   })
-  .listen(6250);
-
-console.log(
-  `🦊 Elysia is running at http://${app.server?.hostname}:${app.server?.port}`
-);

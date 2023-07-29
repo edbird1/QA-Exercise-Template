@@ -94,6 +94,10 @@ Some resources that may be helpful, but are not necessary to use the examples pr
 - https://handlebarsjs.com/
 - https://jsonlogic.com/
 
+
+If you're looking to interface with the APIs a bit more directly, this might be of use as well:
+- https://elysiajs.com/patterns/lazy-loading-module.html#testing
+
 You can use the examples provided in the `examples` folder to test the API.
 - [receipt.md](examples/receipt.md)
 - [icon.md](examples/icon.md)
