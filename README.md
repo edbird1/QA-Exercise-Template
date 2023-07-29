@@ -106,3 +106,9 @@ You can use the examples provided in the `examples` folder to test the API.
 You are also encouraged to create your own examples to test the API with.
 
 You are encouraged to fork this repository. 
+
+P.S. 
+
+If you're wanting to do "Database Validations" as well, there is a "data.json" file that is produced. (I wanted to avoid requiring individuals to set up a database for this challenge, but if you want to, you can use this file as a database.)
+
+You may also delete the file if you want to start fresh. It will be recreated when the application is restarted.
