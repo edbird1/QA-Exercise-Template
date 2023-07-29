@@ -1,5 +1,5 @@
 
-# Badge
+# Icon
 
 Template:
 ```json
