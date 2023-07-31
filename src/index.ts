@@ -26,6 +26,7 @@ export const app = new Elysia()
   .get("/", ({ set }) => {
     set.redirect = '/swagger'
   }, {
+    type: 'json',
     detail: {
       deprecated: true,
       summary: 'Redirects to the Swagger UI.',
@@ -35,6 +36,7 @@ export const app = new Elysia()
     body.template = DomPurify.sanitize(body.template)
     return templates.createTemplate({ template: body })
   }, {
+    type: 'json',
     detail: {
       summary: 'Creates a new template.',
     },
@@ -45,6 +47,7 @@ export const app = new Elysia()
     body.template = DomPurify.sanitize(body.template)
     return templates.putTemplate({ id: params.id, template: body })
   }, {
+    type: 'json',
     detail: {
       summary: 'Updates a template by ID, or creates it if it does not exist.',
     },
@@ -54,6 +57,7 @@ export const app = new Elysia()
   .delete('/templates/:id', async ({ params }) => {
     return templates.deleteTemplate({ id: params.id })
   }, {
+    type: 'json',
     detail: {
       summary: 'Deletes a template by ID.',
     },
@@ -65,6 +69,7 @@ export const app = new Elysia()
   .get('/templates/:id', async ({ params }) => {
     return templates.getTemplate({ id: params.id })
   }, {
+    type: 'json',
     detail: {
       summary: 'Gets a template by ID.',
     },
@@ -79,6 +84,7 @@ export const app = new Elysia()
     for(const header of template.headers ?? []) set.headers[header.name] = header.value
     return result
   }, {
+    type: 'json',
     detail: {
       summary: 'Processes a template with the given data from the request body.',
     },
@@ -102,6 +108,7 @@ export const app = new Elysia()
     return result
   },
   {
+    type: 'json',
     detail: {
       summary: 'Processes a template with the given data from the query string.',
       description: 'While Swagger UI only presents name & age as query parameters, you can pass in any data you need.',
