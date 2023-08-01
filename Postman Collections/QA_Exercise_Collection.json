@@ -724,9 +724,9 @@
 											"    pm.response.to.have.status(400);\r",
 											"});\r",
 											"\r",
-											"//Verify error text from response body when age is not provided\r",
-											"pm.test(\"Validate Negative Age Input Error Response\", function () {\r",
-											"    pm.expect(pm.response.text()).to.include(\"Invalid data: 'age' must be a positive integer\");\r",
+											"//Verify error text from response body when age is not a number/integer\r",
+											"pm.test(\"Validate Non-number Age Input Error Response\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"Invalid data: data/age must be number\");\r",
 											"}); "
 										],
 										"type": "text/javascript"
@@ -742,7 +742,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"name\": \"John\",\r\n  \"age\": \"-23\"\r\n}",
+									"raw": "{\r\n  \"name\": \"John\",\r\n  \"age\": \"B\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
