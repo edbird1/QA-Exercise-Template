@@ -735,8 +735,8 @@
 											"\r",
 											"//Verify error text from response body when age is not provided\r",
 											"pm.test(\"Validate Missing Age Error Response\", function () {\r",
-											"    pm.expect(pm.response.text()).to.include(\"Invalid data: data must have required property 'age'\");\r",
-											"});"
+											"    pm.expect(pm.response.text()).to.include(\"Invalid data: 'age' must be a positive integer\");\r",
+											"}); "
 										],
 										"type": "text/javascript"
 									}
@@ -751,7 +751,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"name\": \"John\"\r\n}",
+									"raw": "{\r\n  \"name\": \"John\",\r\n  \"age\": \"-23\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
