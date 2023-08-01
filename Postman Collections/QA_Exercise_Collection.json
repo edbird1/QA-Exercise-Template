@@ -734,7 +734,7 @@
 											"});\r",
 											"\r",
 											"//Verify error text from response body when age is not provided\r",
-											"pm.test(\"Validate Missing Age Error Response\", function () {\r",
+											"pm.test(\"Validate Negative Age Input Error Response\", function () {\r",
 											"    pm.expect(pm.response.text()).to.include(\"Invalid data: 'age' must be a positive integer\");\r",
 											"}); "
 										],
