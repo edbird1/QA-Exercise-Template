@@ -141,6 +141,10 @@
 									"script": {
 										"id": "4ad8a630-4580-452c-967e-a39d0e4beab9",
 										"exec": [
+											"var responseID = pm.response.text();\r",
+											"\r",
+											"var expectedID = pm.environment.get(\"id\");\r",
+											"\r",
 											"// Test a status code of 200 is returned for a successful request\r",
 											"pm.test(\"Status code is 200\", function () {\r",
 											"    pm.response.to.have.status(200);\r",
@@ -150,7 +154,11 @@
 											"pm.test(\"Response time is less than 200ms\", function () {\r",
 											"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
 											"});\r",
-											""
+											"\r",
+											"//Verify Template ID does not change\r",
+											"pm.test(\"Template ID is the same\", function () {\r",
+											"    pm.expect(responseID).to.eql(expectedID);\r",
+											"});"
 										],
 										"type": "text/javascript"
 									}
