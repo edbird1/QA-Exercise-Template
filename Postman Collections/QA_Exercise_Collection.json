@@ -32,7 +32,7 @@
 									}
 								}
 							],
-							"_postman_id": "bc492fff-c4d1-40f5-9387-0a800c6ace6b",
+							"id": "bc492fff-c4d1-40f5-9387-0a800c6ace6b",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -122,7 +122,7 @@
 									}
 								}
 							],
-							"_postman_id": "a05615cd-d220-4b34-a5e5-398f2c2e6d2b",
+							"id": "a05615cd-d220-4b34-a5e5-398f2c2e6d2b",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -134,7 +134,7 @@
 							"response": []
 						},
 						{
-							"name": "templates/id",
+							"name": "templates/id (Update)",
 							"event": [
 								{
 									"listen": "test",
@@ -156,7 +156,7 @@
 									}
 								}
 							],
-							"_postman_id": "c8947ee3-7b50-41f4-8679-d578d285ecf5",
+							"id": "c8947ee3-7b50-41f4-8679-d578d285ecf5",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -198,7 +198,7 @@
 									}
 								}
 							],
-							"_postman_id": "d7a5246e-727f-45ee-a78e-30b4adb9b7be",
+							"id": "d7a5246e-727f-45ee-a78e-30b4adb9b7be",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -231,7 +231,7 @@
 									}
 								}
 							],
-							"_postman_id": "e88b0536-c64b-423e-9f46-7724903a10a7",
+							"id": "e88b0536-c64b-423e-9f46-7724903a10a7",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -273,7 +273,7 @@
 									}
 								}
 							],
-							"_postman_id": "5e8754ed-5ad7-41f8-944a-0eb23ac9ed81",
+							"id": "5e8754ed-5ad7-41f8-944a-0eb23ac9ed81",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -336,7 +336,7 @@
 									}
 								}
 							],
-							"_postman_id": "aecb6755-0740-4e1a-8d15-1b3f22332130",
+							"id": "aecb6755-0740-4e1a-8d15-1b3f22332130",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -369,7 +369,7 @@
 									}
 								}
 							],
-							"_postman_id": "1e5334cf-de95-469d-b574-6c73a9925373",
+							"id": "1e5334cf-de95-469d-b574-6c73a9925373",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -381,8 +381,7 @@
 							"response": []
 						}
 					],
-					"_postman_id": "457a4a7d-d392-4846-b918-dff3cf606923",
-					"_postman_isSubFolder": true
+					"id": "457a4a7d-d392-4846-b918-dff3cf606923"
 				},
 				{
 					"name": "Negative Test Cases",
@@ -409,7 +408,7 @@
 									}
 								}
 							],
-							"_postman_id": "f0bba865-4393-4ad2-930b-0afe6c0b9f23",
+							"id": "f0bba865-4393-4ad2-930b-0afe6c0b9f23",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -451,7 +450,7 @@
 									}
 								}
 							],
-							"_postman_id": "2ed96625-80a1-4a45-b4a2-709853aa80fd",
+							"id": "2ed96625-80a1-4a45-b4a2-709853aa80fd",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -484,7 +483,7 @@
 									}
 								}
 							],
-							"_postman_id": "5e9078a5-6962-4d7b-95bb-1e36dc466141",
+							"id": "5e9078a5-6962-4d7b-95bb-1e36dc466141",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -526,7 +525,7 @@
 									}
 								}
 							],
-							"_postman_id": "a4988c73-f757-4565-b5a7-11bd6ed90164",
+							"id": "a4988c73-f757-4565-b5a7-11bd6ed90164",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -558,7 +557,7 @@
 									}
 								}
 							],
-							"_postman_id": "dabad1b7-851c-4d4b-86e9-43101c105085",
+							"id": "dabad1b7-851c-4d4b-86e9-43101c105085",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -600,7 +599,7 @@
 									}
 								}
 							],
-							"_postman_id": "c0187067-2e73-44f2-8a40-b0a88338ff65",
+							"id": "c0187067-2e73-44f2-8a40-b0a88338ff65",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -642,7 +641,7 @@
 									}
 								}
 							],
-							"_postman_id": "7f41c7d6-1701-4c5e-abce-9f2c913d4d24",
+							"id": "7f41c7d6-1701-4c5e-abce-9f2c913d4d24",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -684,7 +683,7 @@
 									}
 								}
 							],
-							"_postman_id": "4a8c8b02-a42d-4615-a595-07370257998d",
+							"id": "4a8c8b02-a42d-4615-a595-07370257998d",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -745,7 +744,7 @@
 									}
 								}
 							],
-							"_postman_id": "f9cce7e9-434a-4d3a-aa7d-d0ef6b7c5cab",
+							"id": "f9cce7e9-434a-4d3a-aa7d-d0ef6b7c5cab",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -784,11 +783,10 @@
 							"response": []
 						}
 					],
-					"_postman_id": "b84849ae-c5f8-444e-b4de-7b0ee15d387a",
-					"_postman_isSubFolder": true
+					"id": "b84849ae-c5f8-444e-b4de-7b0ee15d387a"
 				}
 			],
-			"_postman_id": "d71d8898-6e69-404e-a137-3f605f58e720",
+			"id": "d71d8898-6e69-404e-a137-3f605f58e720",
 			"description": "Testing the Birthday Template"
 		}
 	]
