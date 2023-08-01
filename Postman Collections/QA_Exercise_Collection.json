@@ -1,0 +1,795 @@
+{
+	"info": {
+		"_postman_id": "287816eb-15dd-41ef-b819-2f846402ee3f",
+		"name": "QA-Exercise-Template-PM",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Birthday",
+			"item": [
+				{
+					"name": "Positive Test Cases",
+					"item": [
+						{
+							"name": "templates",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "5b5ef8f2-0801-45f0-996a-9e54f5dc48a7",
+										"exec": [
+											"// Test a status code of 200 is returned for a successful request\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"//Set id from response as an environmental variable\r",
+											"var data = pm.response.text();\r",
+											"pm.environment.set(\"id\", data);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"_postman_id": "bc492fff-c4d1-40f5-9387-0a800c6ace6b",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Birthday Card\",\r\n  \"description\": \"A card that says happy birthday.\",\r\n  \"template\": \"<b>Hello {{name}}!</b><br/> Happy {{age}}th birthday!<br/> {{turning}} is coming up soon!\",\r\n  \"headers\": [\r\n    {\r\n      \"name\": \"Content-Type\",\r\n      \"value\": \"text/html\"\r\n    }\r\n  ],\r\n  \"dataSchema\": {\r\n    \"type\": \"object\",\r\n    \"properties\": {\r\n      \"name\": {\r\n        \"type\": \"string\"\r\n      },\r\n      \"age\": {\r\n        \"type\": \"number\"\r\n      }\r\n    },\r\n    \"required\": [\r\n      \"name\",\r\n      \"age\"\r\n    ]\r\n  },\r\n  \"logic\": {\r\n    \"turning\": {\r\n      \"+\": [\r\n        {\r\n          \"var\": \"age\"\r\n        },\r\n        1\r\n      ]\r\n    }\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:6250/templates"
+							},
+							"response": []
+						},
+						{
+							"name": "templates/id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "683c1594-4c16-44fc-a1fc-6dd729358e1f",
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"// Test a status code of 200 is returned for a successful request\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"//Verify Response time is less than 200ms\r",
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+											"});\r",
+											"\r",
+											"// Test the existence of properties in the root object\r",
+											"pm.test(\"Root object contains name, description, template, headers, dataSchema, and logic properties\", function () {\r",
+											"    pm.expect(jsonData).to.have.property('name');\r",
+											"    pm.expect(jsonData).to.have.property('description');\r",
+											"    pm.expect(jsonData).to.have.property('template');\r",
+											"    pm.expect(jsonData).to.have.property('headers');\r",
+											"    pm.expect(jsonData).to.have.property('dataSchema');\r",
+											"    pm.expect(jsonData).to.have.property('logic');\r",
+											"});\r",
+											"\r",
+											"// Test the properties of the headers array\r",
+											"pm.test(\"Headers array contains objects with name and value properties\", function () {\r",
+											"    jsonData.headers.forEach(function (header) {\r",
+											"        pm.expect(header).to.have.property('name');\r",
+											"        pm.expect(header).to.have.property('value');\r",
+											"    });\r",
+											"});\r",
+											"\r",
+											"//Verify headers have the correct values\r",
+											"pm.test(\"Verify headers are correct\"), function () {\r",
+											"    pm.expect(jsonData.headers[0].name).to.eql(\"Content-Type\");\r",
+											"    pm.expect(jsonData.headers[0].value).to.eql(\"text/html\");\r",
+											"};\r",
+											"\r",
+											"// Test the properties of the dataSchema object\r",
+											"pm.test(\"dataSchema object contains type, properties, and required properties\", function () {\r",
+											"    pm.expect(jsonData.dataSchema).to.have.property('type');\r",
+											"    pm.expect(jsonData.dataSchema).to.have.property('properties');\r",
+											"    pm.expect(jsonData.dataSchema).to.have.property('required');\r",
+											"});\r",
+											"\r",
+											"// Test the properties of the properties object within dataSchema\r",
+											"pm.test(\"properties object within dataSchema contains name and age properties\", function () {\r",
+											"    var properties = jsonData.dataSchema.properties;\r",
+											"    pm.expect(properties).to.have.property('name');\r",
+											"    pm.expect(properties).to.have.property('age');\r",
+											"});\r",
+											"\r",
+											"// Test the properties of the logic object\r",
+											"pm.test(\"logic object contains turning array\", function () {\r",
+											"    var logic = jsonData.logic;\r",
+											"    pm.expect(jsonData.logic).to.have.property('turning');\r",
+											"    pm.expect(jsonData.logic.turning['+'][0].var).to.eql(\"age\");\r",
+											"    pm.expect(jsonData.logic.turning['+'][1]).to.eql(1);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"_postman_id": "a05615cd-d220-4b34-a5e5-398f2c2e6d2b",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:6250/templates/{{id}}"
+							},
+							"response": []
+						},
+						{
+							"name": "templates/id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "4ad8a630-4580-452c-967e-a39d0e4beab9",
+										"exec": [
+											"// Test a status code of 200 is returned for a successful request\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"//Verify Response time is less than 200ms\r",
+											"pm.test(\"Response time is less than 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"_postman_id": "c8947ee3-7b50-41f4-8679-d578d285ecf5",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Birthday Card UPDATE\",\r\n  \"description\": \"A card that says happy birthday for this year and next.\",\r\n  \"template\": \"<b>Hello {{name}}!</b><br/> Happy {{age}}th birthday!<br/> {{turning}} is coming up soon!\",\r\n  \"headers\": [\r\n    {\r\n      \"name\": \"Content-Type\",\r\n      \"value\": \"text/html\"\r\n    }\r\n  ],\r\n  \"dataSchema\": {\r\n    \"type\": \"object\",\r\n    \"properties\": {\r\n      \"name\": {\r\n        \"type\": \"string\"\r\n      },\r\n      \"age\": {\r\n        \"type\": \"number\"\r\n      }\r\n    },\r\n    \"required\": [\r\n      \"name\",\r\n      \"age\"\r\n    ]\r\n  },\r\n  \"logic\": {\r\n    \"turning\": {\r\n      \"+\": [\r\n        {\r\n          \"var\": \"age\"\r\n        },\r\n        1\r\n      ]\r\n    }\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:6250/templates/{{id}}"
+							},
+							"response": []
+						},
+						{
+							"name": "templates/id (Verify Updates)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "683c1594-4c16-44fc-a1fc-6dd729358e1f",
+										"exec": [
+											"//Verify Name Updated\r",
+											"pm.test(\"Verify Name Value Updated\"), function () {\r",
+											"    pm.expect(jsonData.name.value).to.eql(\"Birthday Card UPDATE\");\r",
+											"};\r",
+											"\r",
+											"//Verify Description Updated\r",
+											"pm.test(\"Verify Description Value Updated\"), function () {\r",
+											"    pm.expect(jsonData.description.value).to.eql(\"A card that says happy birthday for this year and next.\");\r",
+											"};"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"_postman_id": "d7a5246e-727f-45ee-a78e-30b4adb9b7be",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:6250/templates/{{id}}"
+							},
+							"response": []
+						},
+						{
+							"name": "template/id/process",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "4904ddd5-70a4-41c5-a5e6-e370baf256f8",
+										"exec": [
+											"// Test a status code of 200 is returned for a successful request\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"//Verify text from response body\r",
+											"pm.test(\"Correct String is Returned\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"<b>Hello John!</b><br> Happy 30th birthday!<br> 31 is coming up soon!\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"_postman_id": "e88b0536-c64b-423e-9f46-7724903a10a7",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"John\",\r\n  \"age\": 30\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:6250/templates/{{id}}/process"
+							},
+							"response": []
+						},
+						{
+							"name": "template/id/process",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "766aab2a-006e-4fad-8e56-cef2d5de4699",
+										"exec": [
+											"// Test a status code of 200 is returned for a successful request\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"//Verify text from response body\r",
+											"pm.test(\"Correct String is Returned\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"<b>Hello Rick!</b><br> Happy 15th birthday!<br> 16 is coming up soon!\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"_postman_id": "5e8754ed-5ad7-41f8-944a-0eb23ac9ed81",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:6250/templates/{{id}}/process?name=Rick&age=15",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "6250",
+									"path": [
+										"templates",
+										"{{id}}",
+										"process"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "Rick"
+										},
+										{
+											"key": "age",
+											"value": "15"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "template/id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "810a30f5-6a91-4688-a8bc-70049f37248e",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"//Confirms Template Deleted\r",
+											"pm.test(\"Template Deleted Confirmation\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"true\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"_postman_id": "aecb6755-0740-4e1a-8d15-1b3f22332130",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": "http://localhost:6250/templates/{{id}}"
+							},
+							"response": []
+						},
+						{
+							"name": "templates/id (Verify Template Deleted)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "683c1594-4c16-44fc-a1fc-6dd729358e1f",
+										"exec": [
+											"// Test a status code of 404 is returned for an unsuccessful request\r",
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"\r",
+											"//Verify error text from response body\r",
+											"pm.test(\"Error Message for No Template Result\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"Template not found\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"_postman_id": "1e5334cf-de95-469d-b574-6c73a9925373",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:6250/templates/{{id}}"
+							},
+							"response": []
+						}
+					],
+					"_postman_id": "457a4a7d-d392-4846-b918-dff3cf606923",
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Negative Test Cases",
+					"item": [
+						{
+							"name": "-templates (Missing Headers)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "5b5ef8f2-0801-45f0-996a-9e54f5dc48a7",
+										"exec": [
+											"// Test a status code of 500 is returned when both header values are not provided\r",
+											"pm.test(\"Status code is 500\", function () {\r",
+											"    pm.response.to.have.status(500);\r",
+											"});\r",
+											"\r",
+											"//Verify error text from response body when header value is not provided\r",
+											"pm.test(\"Error Message For Invalid Header Value\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"Invalid body: 'headers/0/value'. Expected string\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"_postman_id": "f0bba865-4393-4ad2-930b-0afe6c0b9f23",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Birthday Card\",\r\n  \"description\": \"A card that says happy birthday.\",\r\n  \"template\": \"<b>Hello {{name}}!</b><br/> Happy {{age}}th birthday!<br/> {{turning}} is coming up soon!\",\r\n  \"headers\": [\r\n    {\r\n      \"name\": \"Content-Type\"\r\n    }\r\n  ],\r\n  \"dataSchema\": {\r\n    \"type\": \"object\",\r\n    \"properties\": {\r\n      \"name\": {\r\n        \"type\": \"string\"\r\n      },\r\n      \"age\": {\r\n        \"type\": \"number\"\r\n      }\r\n    },\r\n    \"required\": [\r\n      \"name\",\r\n      \"age\"\r\n    ]\r\n  },\r\n  \"logic\": {\r\n    \"turning\": {\r\n      \"+\": [\r\n        {\r\n          \"var\": \"age\"\r\n        },\r\n        1\r\n      ]\r\n    }\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:6250/templates"
+							},
+							"response": []
+						},
+						{
+							"name": "-templates/id (Invalid ID)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "683c1594-4c16-44fc-a1fc-6dd729358e1f",
+										"exec": [
+											"// Test a status code of 404 is returned for an unsuccessful request\r",
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"\r",
+											"//Verify error text from response body\r",
+											"pm.test(\"Error Message for No Template Result\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"Template not found\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"_postman_id": "2ed96625-80a1-4a45-b4a2-709853aa80fd",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:6250/templates/Bad_ID"
+							},
+							"response": []
+						},
+						{
+							"name": "-templates/id (Missing Body)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "4ad8a630-4580-452c-967e-a39d0e4beab9",
+										"exec": [
+											"// Test a status code of 500 is returned for an unsuccessful request\r",
+											"pm.test(\"Status code is 500\", function () {\r",
+											"    pm.response.to.have.status(500);\r",
+											"});\r",
+											"\r",
+											"//Verify error text from response body when the required template fields are not provided\r",
+											"pm.test(\"Error Message for Missing Description\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"Invalid body: 'description'. Expected string\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"_postman_id": "5e9078a5-6962-4d7b-95bb-1e36dc466141",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Birthday Card Update\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:6250/templates/{{id}}"
+							},
+							"response": []
+						},
+						{
+							"name": "-template/id (Invalid ID)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "810a30f5-6a91-4688-a8bc-70049f37248e",
+										"exec": [
+											"// Test a status code of 404 is returned for an unsuccessful request\r",
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"\r",
+											"//Verify error text from response body\r",
+											"pm.test(\"Error Message for No Template Result\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"Template not found\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"_postman_id": "a4988c73-f757-4565-b5a7-11bd6ed90164",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": "http://localhost:6250/templates/Bad_ID"
+							},
+							"response": []
+						},
+						{
+							"name": "-templates (Valid ID Setup)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "5b5ef8f2-0801-45f0-996a-9e54f5dc48a7",
+										"exec": [
+											"// Test a status code of 200 is returned for a successful request\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"//Set id from response as an environmental variable\r",
+											"var data = pm.response.text();\r",
+											"pm.environment.set(\"id_neg\", data);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"_postman_id": "dabad1b7-851c-4d4b-86e9-43101c105085",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Birthday Card\",\r\n  \"description\": \"A card that says happy birthday.\",\r\n  \"template\": \"<b>Hello {{name}}!</b><br/> Happy {{age}}th birthday!<br/> {{turning}} is coming up soon!\",\r\n  \"headers\": [\r\n    {\r\n      \"name\": \"Content-Type\",\r\n      \"value\": \"text/html\"\r\n    }\r\n  ],\r\n  \"dataSchema\": {\r\n    \"type\": \"object\",\r\n    \"properties\": {\r\n      \"name\": {\r\n        \"type\": \"string\"\r\n      },\r\n      \"age\": {\r\n        \"type\": \"number\"\r\n      }\r\n    },\r\n    \"required\": [\r\n      \"name\",\r\n      \"age\"\r\n    ]\r\n  },\r\n  \"logic\": {\r\n    \"turning\": {\r\n      \"+\": [\r\n        {\r\n          \"var\": \"age\"\r\n        },\r\n        1\r\n      ]\r\n    }\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:6250/templates"
+							},
+							"response": []
+						},
+						{
+							"name": "-template/id/process (Missing Name)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "6dfb216c-44aa-41a3-af16-2079d21d0eda",
+										"exec": [
+											"// Test a status code of 400 is returned for an unsuccessful request\r",
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"//Verify error text from response body when name is not provided\r",
+											"pm.test(\"Validate Missing Name Error Response\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"Invalid data: data must have required property 'name'\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"_postman_id": "c0187067-2e73-44f2-8a40-b0a88338ff65",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"age\": 30\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:6250/templates/{{id_neg}}/process"
+							},
+							"response": []
+						},
+						{
+							"name": "-template/id/process (Missing Age)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "ec04a5bc-054d-4cac-9711-9af4282bd6c6",
+										"exec": [
+											"// Test a status code of 400 is returned for an unsuccessful request\r",
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"//Verify error text from response body when age is not provided\r",
+											"pm.test(\"Validate Missing Age Error Response\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"Invalid data: data must have required property 'age'\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"_postman_id": "7f41c7d6-1701-4c5e-abce-9f2c913d4d24",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"John\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:6250/templates/{{id_neg}}/process"
+							},
+							"response": []
+						},
+						{
+							"name": "-template/id/process (Missing Name)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "314f2c8c-b6c4-4514-a150-85b0f2959348",
+										"exec": [
+											"// Test a status code of 400 is returned for an unsuccessful request\r",
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"//Verify error text from response body when name is not provided\r",
+											"pm.test(\"Validate Missing Name Error Response\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"Invalid data: data must have required property 'name'\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"_postman_id": "4a8c8b02-a42d-4615-a595-07370257998d",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:6250/templates/{{id_neg}}/process?age=13",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "6250",
+									"path": [
+										"templates",
+										"{{id_neg}}",
+										"process"
+									],
+									"query": [
+										{
+											"key": "age",
+											"value": "13",
+											"type": "text"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "-template/id/process (Missing Age)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "314f2c8c-b6c4-4514-a150-85b0f2959348",
+										"exec": [
+											"// Test a status code of 400 is returned for an unsuccessful request\r",
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"//Verify error text from response body when age is not provided\r",
+											"pm.test(\"Validate Missing Age Error Response\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"Invalid data: data must have required property 'age'\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"_postman_id": "f9cce7e9-434a-4d3a-aa7d-d0ef6b7c5cab",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"John\",\r\n  \"age\": 30\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:6250/templates/{{id_neg}}/process?name=Jenny",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "6250",
+									"path": [
+										"templates",
+										"{{id_neg}}",
+										"process"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "Jenny"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_id": "b84849ae-c5f8-444e-b4de-7b0ee15d387a",
+					"_postman_isSubFolder": true
+				}
+			],
+			"_postman_id": "d71d8898-6e69-404e-a137-3f605f58e720",
+			"description": "Testing the Birthday Template"
+		}
+	]
+}
